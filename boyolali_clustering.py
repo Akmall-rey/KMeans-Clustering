@@ -42,7 +42,7 @@ def main():
                 <br>
                 <h3>Permasalahan</h3>
                     <p>Di Indonesia, permasalahan kesehatan pada balita masih menjadi permasalahan yang perlu diperhatikan. Beberapa penyakit seperti pneumonia, diare, kurang gizi, dan gizi buruk ini tidak hanya mengakibatkan kematian, tetapi juga berdampak pada kualitas hidup dan perkembangan anak-anak. Dalam penanganannya, Pemerintah Indonesia telah mengambil langkah-langkah untuk menurunkan angka kematian balita dengan berbagai bantuan kesehatan yang diberikan. Namun, bantuan yang diberikan sering kali kurang merata dan tidak tepat sasaran. Hal ini dapat disebabkan oleh beberapa faktor, salah satunya adalah kurangnya perencanaan yang matang dalam mengidentifikasi daerah-daerah yang paling terdampak dan memerlukan penanganan lebih intensif. Sebagai akibatnya, beberapa wilayah mendapatkan bantuan yang tidak seimbang dengan tingkat kebutuhan mereka, sementara wilayah lain yang sangat membutuhkan justru kurang mendapatkan perhatian. </p>
-                <h6 class="bold">Bagaimana Cara Menanganinya?</h6>
+                <h6 class="bold">Bagaimana Solusinya?</h6>
                     <p>Berdasarkan permasalahan yang telah dijabarkan, penerapan algoritma K-Means Clustering dirasa dapat membantu dalam menganalisis data kesehatan balita menurut kecamatan untuk memprioritaskan program penanggulangan yang lebih efektif. Analisis ini mengambil beberapa parameter seperti diare, pneumonia, gizi buruk, gizi kurang, dan kematian balita, dengan tujuan untuk mengidentifikasi kecamatan-kecamatan yang memerlukan perhatian khusus dan intervensi kesehatan yang lebih intensif di Kabupaten Boyolali. Dengan demikian, program penanggulangan kesehatan balita dapat lebih terfokus dan tepat sasaran, meningkatkan kualitas hidup dan kesehatan anak-anak di wilayah tersebut.</p>
                 <h3>Tahapan Penelitian</h3>
                     <p class="bold">1. Pengumpulan Data</p>
@@ -70,16 +70,83 @@ def main():
         st.markdown("""
             <div class="justified">
                 <p class="bold">3. Reduksi Dimensi Data</p>
-                    <p>Dalam memberikan visualisasi yang mudah dipahami, kami menggunakan PCA sebagai metode untuk reduksi dimensi. Awalnya, PCA akan diinisialisasi sebanyak lima variabel yang digunakan. Selanjutnya, dipilih dua PCA yang mewakili sebagian besar data dengan mempertimbangkan nilai varians yang dijelaskan oleh masing-masing komponen untuk memberikan visualisasi grafik 2D.</p>
+                    <p>Dalam memberikan visualisasi yang mudah dipahami, kami menggunakan PCA sebagai metode untuk reduksi dimensi. Awalnya, PCA akan diinisialisasi sebanyak lima variabel yang digunakan. Selanjutnya, dipilih dua PCA yang mewakili sebagian besar data dengan mempertimbangkan nilai varians yang dijelaskan oleh masing-masing komponen untuk memberikan visualisasi grafik menjadi dua dimensi.</p>
             </div>
         """, unsafe_allow_html=True)
-        st.image("img/hasil_analisis/pca_graph.png")
+
+        st.image("img/hasil_analisis/var_explain.png", caption="Explained Variance")
+        st.markdown("""
+            <div class="justified">
+                <p>PC1 menjelaskan sekitar 34% varians dalam data, PC2 menjelaskan sekitar 32% varians dalam data, PC3 menjelaskan sekitar 16% varians dalam data, PC4 menjelaskan sekitar 11% varians dalam data, dan PC5 menjelaskan sekitar 4% varians dalam data. Berdasarkan rasio varians tersebut, kita akan mengambil 2 variabel komponen untuk visualisasi grafik. Pada penelitian ini digunakan PC1 dan PC2 yang berarti mewakili sekitar 66% varians dalam data. Tahap selanjutnya ialah menentukan variabel mana yang berpengaruh besar terhadap variabilitas total dalam data.</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+        st.image("img/hasil_analisis/pca_comp.png", caption="Komponen PCA")
+        st.markdown("""
+            <div class="justified">
+                <p>Dari tabel diatas, kita dapat melihat bahwa komponen utama dari PC1 ialah variabel balita gizi buruk dan komponen utama dari PC2 ialah variabel kematian balita.</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+        st.image("img/hasil_analisis/pca_graph.png", caption="Scatter Plot PCA")
+        st.markdown("""
+            <div class="justified">
+                <p>Setelah didapatkan 2 variabel berdasarkan nilai varians yang dijelaskan serta komponen utama dari variabel tersebut, maka kita dapat membuat scatter plot PCA sebagai visualisasi sebaran datanya.</p>
+            </div>
+        """, unsafe_allow_html=True)
+
         st.markdown("""
             <div class="justified">
                 <p class="bold">4. Klasterisasi Data</p>
-                    <p>Sebelum melakukan Clustering, kita terlebih dahulu menguji performa algoritma K-means pada data yang sudah dinormalisasi untuk menentukan nilai k yang optimal. Pengujian bisa dilakukan dengan beberapa cara, salah satunya adalah menggunakan Silhouette Method.</p>
+                    <p>Sebelum melakukan Clustering, kita terlebih dahulu menguji performa algoritma K-means pada data yang sudah dinormalisasi untuk menentukan nilai k yang optimal. Pengujian bisa dilakukan dengan beberapa cara, salah satunya adalah dengan menggunakan parameter Davis Bouldin ataupun Silhouette Method. Pada parameter Davies Bouldin, Indeks Davies Bouldin (IDB) terendah menunjukkan jumlah klaster yang paling optimal.</p>
+                    <p>Berdasarkan hasil pengujian performa tersebut, diperoleh hasil sebagai berikut : </p>
             </div>
         """, unsafe_allow_html=True)
+
+        st.image("img/hasil_analisis/davies_bouldin.png", caption="Indeks Davies Bouldin (IDB)")
+        st.markdown("""
+            <div class="justified">
+                <p>Dari nilai-nilai ini, 𝑘 = 5 memiliki nilai DBI terendah, yang menunjukkan clustering terbaik. Pengujian juga dilakukan dengan menggunakan Silhouette Method. Pada metode Silhouette, nilai 𝑘 yang optimal ditentukan dengan mencari titik tertinggi pada grafik.</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+        st.image("img/hasil_analisis/silhouette.png", caption="Silhouette Method")
+        st.markdown("""
+            <div class="justified">
+                <p>Berdasarkan grafik diatas, titik tertinggi grafik berada pada k = 5. Jadi, berdasarkan Metode Silhouette dan nilai Davis-Bouldin, nilai k yang optimal yaitu k = 5. Setelah menentukan jumlah klaster, maka selanjutnya diperoleh hasil klaster seperti pada gambar dibawah.</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+        st.image("img/hasil_analisis/cluster_0.png", caption="Cluster 0")
+        st.image("img/hasil_analisis/cluster_1.png", caption="Cluster 1")
+        st.image("img/hasil_analisis/cluster_2.png", caption="Cluster 2")
+        st.image("img/hasil_analisis/cluster_3.png", caption="Cluster 3")
+        st.image("img/hasil_analisis/cluster_4.png", caption="Cluster 4")
+
+        st.markdown("""
+            <div class="justified">
+                <p>Pada klaster 0 terdiri dari 5 kecamatan, klaster 1 terdiri dari 8 kecamatan, klaster 2 terdiri dari 6 kecamatan, klaster 3 terdiri dari 1 kecamatan, dan klaster 4 terdiri dari 2 kecamatan. Hasil tersebut kemudian divisualisasikan dalam bentuk plot klaster berdasarkan kemiripan jarak euclidean dari lima variabel, yang direduksi menggunakan PCA (Principal Component Analysis) menjadi dua dimensi yang lebih kecil.</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+        st.image("img/hasil_analisis/pca_cluster_graph.png", caption="Scatter Plot Cluster PCA")
+        st.markdown("""
+            <div class="justified">
+                <p>Plot diatas adalah hasil klasterisasi data yang sudah direduksi menjadi dua komponen utama menggunakan PCA, sehingga saat ini kita telah memiliki total 5 klaster. Karena proses klasterisasi telah selesai, sekarang kita bisa membuat nilai prioritas dari setiap klaster yang didapatkan. </p>
+            </div>
+        """, unsafe_allow_html=True)
+
+        st.image("img/hasil_analisis/cluster_priority.png", caption="Cluster Priority")
+        st.markdown("""
+            <div class="justified">
+                <p>Pada kasus ini, setiap kategori memiliki bobot nilainya masing-masing. Kategori rendah ditetapkan dengan bobot nilai 1, kategori sedang dengan bobot nilai 2, lalu kategori tinggi dengan bobot nilai 3. Nilai prioritas tiap klaster didapat dari total nilai indeks pada tiap klaster dibagi dengan jumlah kategori. Dari data tabel diatas, dapat disimpulkan bahwa klaster 3 dan klaster 0 memiliki kondisi kesehatan balita yang paling rendah dan harus diprioritaskan untuk penanganan kesehatan. Dengan demikian, upaya penanggulangan kesehatan balita dapat lebih terfokus dan efektif dalam rangka meningkatkan kondisi kesehatan anak-anak di Kabupaten Boyolali secara signifikan.</p>
+                    
+                
+            </div>
+        """, unsafe_allow_html=True)
+
+
+
         
     with tab2:
 
