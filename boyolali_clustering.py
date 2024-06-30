@@ -41,8 +41,9 @@ def main():
                 <div class="center-img">
                     <img src="https://pyfahealth.com/wp-content/uploads/2022/12/Gejala-Pneumonia-pada-Anak-dan-Cara-Mengobati-.jpg" alt="Deskripsi gambar" width="500">
                 </div>
+                <br>
                 <h3>Permasalahan</h3>
-                    <p>Di Indonesia, permasalahan kesehatan pada balita masih menjadi permasalahan yang perlu diperhatikan. Beberapa penyakit seperti pneumonia, diare, kurang gizi, dan gizi buruk ini tidak hanya mengakibatkan kematian, tetapi juga berdampak pada kualitas hidup dan perkembangan anak-anak. Dalam penanganannya, Pemerintah Indonesia telah mengambil langkah-langkah untuk menurunkan angka kematian balita dengan berbagai bantuan kesehatan yang diberikan. Namun, pemberian bantuan </p>
+                    <p>Di Indonesia, permasalahan kesehatan pada balita masih menjadi permasalahan yang perlu diperhatikan. Beberapa penyakit seperti pneumonia, diare, kurang gizi, dan gizi buruk ini tidak hanya mengakibatkan kematian, tetapi juga berdampak pada kualitas hidup dan perkembangan anak-anak. Dalam penanganannya, Pemerintah Indonesia telah mengambil langkah-langkah untuk menurunkan angka kematian balita dengan berbagai bantuan kesehatan yang diberikan. Namun, bantuan yang diberikan sering kali kurang merata dan tidak tepat sasaran. Hal ini dapat disebabkan oleh beberapa faktor, salah satunya adalah kurangnya perencanaan yang matang dalam mengidentifikasi daerah-daerah yang paling terdampak dan memerlukan penanganan lebih intensif. Sebagai akibatnya, beberapa wilayah mendapatkan bantuan yang tidak seimbang dengan tingkat kebutuhan mereka, sementara wilayah lain yang sangat membutuhkan justru kurang mendapatkan perhatian. </p>
                 <h6 class="bold">Bagaimana Cara Menanganinya?</h6>
                     <p>Berdasarkan permasalahan yang telah dijabarkan, penerapan algoritma K-Means Clustering dirasa dapat membantu dalam menganalisis data kesehatan balita menurut kecamatan untuk memprioritaskan program penanggulangan yang lebih efektif. Analisis ini mengambil beberapa parameter seperti diare, pneumonia, gizi buruk, gizi kurang, dan kematian balita, dengan tujuan untuk mengidentifikasi kecamatan-kecamatan yang memerlukan perhatian khusus dan intervensi kesehatan yang lebih intensif di Kabupaten Boyolali. Dengan demikian, program penanggulangan kesehatan balita dapat lebih terfokus dan tepat sasaran, meningkatkan kualitas hidup dan kesehatan anak-anak di wilayah tersebut.</p>
                 <h3>Tahapan Penelitian</h3>
@@ -195,7 +196,7 @@ def main():
             # Menampilkan centroid awal
             st.write("Centroid Awal:")
             initial_centroids = kmeans.cluster_centers_
-            st.write(pd.DataFrame(initial_centroids, columns=data.columns[1:6]))
+            st.table(pd.DataFrame(initial_centroids, columns=data.columns[1:6]))
 
             cluster_labels = kmeans.predict(normalisasiData)
             data['Cluster'] = cluster_labels
