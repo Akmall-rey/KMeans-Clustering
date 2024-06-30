@@ -9,10 +9,8 @@ from sklearn.metrics import silhouette_score
 import seaborn as sns
 
 def main():
-    # Insert containers separated into tabs:
     tab1, tab2, tab3 = st.tabs(["Artikel", "Analysis", "Our Team"])
 
-    # You can also use "with" notation:
     with tab1:
 
         st.markdown("""
@@ -48,16 +46,40 @@ def main():
                     <p>Berdasarkan permasalahan yang telah dijabarkan, penerapan algoritma K-Means Clustering dirasa dapat membantu dalam menganalisis data kesehatan balita menurut kecamatan untuk memprioritaskan program penanggulangan yang lebih efektif. Analisis ini mengambil beberapa parameter seperti diare, pneumonia, gizi buruk, gizi kurang, dan kematian balita, dengan tujuan untuk mengidentifikasi kecamatan-kecamatan yang memerlukan perhatian khusus dan intervensi kesehatan yang lebih intensif di Kabupaten Boyolali. Dengan demikian, program penanggulangan kesehatan balita dapat lebih terfokus dan tepat sasaran, meningkatkan kualitas hidup dan kesehatan anak-anak di wilayah tersebut.</p>
                 <h3>Tahapan Penelitian</h3>
                     <p class="bold">1. Pengumpulan Data</p>
-                    <p>Data dikumpulkan dari berbagai sumber yang terpercaya, seperti jurnal ilmiah, artikel dan dataset publik yang relevan. Proses pengumpulan data melibatkan pencarian dan pemilihan sumber yang sesuai dengan kriteria penelitian, serta mengumpulkan data dari sumber-sumber tersebut. Pada penelitian kali ini, penulis mengambil dataset dari web <a href="https://data.boyolali.go.id/">Portal Data Boyolali</a>.</p>
+                        <p>Data dikumpulkan dari berbagai sumber yang terpercaya, seperti jurnal ilmiah, artikel dan dataset publik yang relevan. Proses pengumpulan data melibatkan pencarian dan pemilihan sumber yang sesuai dengan kriteria penelitian, serta mengumpulkan data dari sumber-sumber tersebut. Pada penelitian kali ini, penulis mengambil dataset dari web <a href="https://data.boyolali.go.id/">Portal Data Boyolali</a>.</p>
                     <p class="bold">2. Perencanaan dan Penentuan Metode</p>
-                    <p>Setelah data terkumpul, langkah selanjutnya yang dilakukan adalah menentukan apa yang akan dibuat dan perencanaan tahapan-tahapan penelitian yang akan dilakukan, termasuk menentukan parameter yang digunakan untuk analisis.</p>
+                        <p>Setelah data terkumpul, langkah selanjutnya yang dilakukan adalah menentukan apa yang akan dibuat dan perencanaan tahapan-tahapan penelitian yang akan dilakukan, termasuk menentukan parameter yang digunakan untuk analisis.</p>
                     <p class="bold">3. Implementasi dan Pengujian</p>
-                    <p>Pada tahap ini, dataset akan melalui proses olah data menggunakan algoritma K-Means dan diuji menggunakan aplikasi seperti RapidMiner dan Google Colab. Pengujian harus dilakukan secara menyeluruh untuk mengidentifikasi kesalahan ataupun masalah kinerja dari program yang dibuat. Proses ini melibatkan revisi dan debugging kode untuk memastikan algoritma berfungsi dengan benar dan menghasilkan output yang diharapkan.</p>
+                        <p>Pada tahap ini, dataset akan melalui proses olah data menggunakan algoritma K-Means dan diuji menggunakan aplikasi seperti RapidMiner dan Google Colab. Pengujian harus dilakukan secara menyeluruh untuk mengidentifikasi kesalahan ataupun masalah kinerja dari program yang dibuat. Proses ini melibatkan revisi dan debugging kode untuk memastikan algoritma berfungsi dengan benar dan menghasilkan output yang diharapkan.</p>
                     <p class="bold">4. Penyelesaian dan Analisis Hasil</p>
-                    <p>Setelah pengujian berhasil dan output yang dihasilkan sesuai, data yang telah diolah dimasukkan ke dalam model untuk melihat hasil klasterisasi. Hasil dari klasterisasi dianalisis untuk mengidentifikasi kecamatan-kecamatan dengan kondisi kesehatan balita yang memerlukan perhatian khusus. Kesimpulan dibuat berdasarkan hasil analisis ini untuk memberikan rekomendasi program penanggulangan kesehatan yang lebih efektif di Kabupaten Boyolali.</p>
-                <h3>Hasil Analisis<h3>
+                        <p>Setelah pengujian berhasil dan output yang dihasilkan sesuai, data yang telah diolah dimasukkan ke dalam model untuk melihat hasil klasterisasi. Hasil dari klasterisasi dianalisis untuk mengidentifikasi kecamatan-kecamatan dengan kondisi kesehatan balita yang memerlukan perhatian khusus. Kesimpulan dibuat berdasarkan hasil analisis ini untuk memberikan rekomendasi program penanggulangan kesehatan yang lebih efektif di Kabupaten Boyolali.</p>
+                <h3>Hasil Analisis</h3>
+                    <p class="bold">1. Data Selection</p>
+                        <p>Data yang diambil pada penelitian ini mencakup lima parameter utama yang relevan dengan kesehatan balita, yaitu balita penderita diare, balita penderita pneumonia, balita gizi kurang, balita gizi buruk, dan kematian balita. Data tersebut kemudian dikategorisasi menjadi 3 kategori, yakni rendah, sedang, dan tinggi berdasarkan nilai mean dan standar deviasi. Untuk nilai dibawah low dikategorikan rendah, nilai diantara low dan high dikategorikan sedang, dan nilai diatas high dikategorikan tinggi.</p>
             </div>
             """, unsafe_allow_html=True)
+        st.image("img/hasil_analisis/stat_desc.png")
+        st.markdown("""
+            <div class="justified">
+                <p class="bold">2. Normalisasi Data</p>
+                    <p>Normalisasi dilakukan untuk memastikan bahwa semua variabel memiliki bobot yang sama dan tidak ada satu variabel pun yang mendominasi analisis karena skala yang berbeda. Dalam penelitian ini, semua data indikator kesehatan akan dinormalisasikan dalam rentang 0-1.</p>
+                    
+            </div>
+        """, unsafe_allow_html=True)
+        st.image("img/hasil_analisis/norm_data.png")
+        st.markdown("""
+            <div class="justified">
+                <p class="bold">3. Reduksi Dimensi Data</p>
+                    <p>Dalam memberikan visualisasi yang mudah dipahami, kami menggunakan PCA sebagai metode untuk reduksi dimensi. Awalnya, PCA akan diinisialisasi sebanyak lima variabel yang digunakan. Selanjutnya, dipilih dua PCA yang mewakili sebagian besar data dengan mempertimbangkan nilai varians yang dijelaskan oleh masing-masing komponen untuk memberikan visualisasi grafik 2D.</p>
+            </div>
+        """, unsafe_allow_html=True)
+        st.image("img/hasil_analisis/pca_graph.png")
+        st.markdown("""
+            <div class="justified">
+                <p class="bold">4. Klasterisasi Data</p>
+                    <p>Sebelum melakukan Clustering, kita terlebih dahulu menguji performa algoritma K-means pada data yang sudah dinormalisasi untuk menentukan nilai k yang optimal. Pengujian bisa dilakukan dengan beberapa cara, salah satunya adalah menggunakan Silhouette Method.</p>
+            </div>
+        """, unsafe_allow_html=True)
         
     with tab2:
 
@@ -132,8 +154,42 @@ def main():
 
             normalized_df = normalized_df[['KECAMATAN'] + list(normalized_df.columns[:-1])]
 
-            st.write("Data yang sudah dinormalisasi:")
-            st.table(normalized_df)
+            exp_norm = st.expander("See Normalization Data")
+            exp_norm.write("Data yang sudah dinormalisasi:")
+            exp_norm.table(normalized_df)
+
+            # Explained_variance_ratio
+            pca_var = PCA(n_components=None)
+            pca_var.fit(normalisasiData)
+
+            explained_variance_ratio = pca_var.explained_variance_ratio_
+            explained_variance_ratio_cumsum = np.cumsum(explained_variance_ratio)
+
+            datapoint = {
+                'Principal Component': np.arange(1, len(explained_variance_ratio) + 1),
+                'Explained Variance Ratio': explained_variance_ratio,
+                'Cumulative Explained Variance Ratio': explained_variance_ratio_cumsum
+            }
+
+            explained_variance_df = pd.DataFrame(datapoint)
+
+            exp_var = st.expander("See Explained Variance")
+            exp_var.write("Explained Variance Analysis:")
+            exp_var.table(explained_variance_df)
+
+
+            # PCA Component
+            pca = PCA(n_components=5)
+            pca_data = pca.fit_transform(normalisasiData)
+
+            loadings = pca.components_
+
+            feature_names = dataCluster.columns
+            loadings_df = pd.DataFrame(loadings.T, index=feature_names, columns=['PC1', 'PC2', 'PC3', 'PC4', 'PC5'])
+
+            exp_comp = st.expander("See PCA Component")
+            exp_comp.write("Komponen Utama di setiap PCA:")
+            exp_comp.table(loadings_df)
 
 
             # PCA sebelum klaster
@@ -194,9 +250,10 @@ def main():
             kmeans.fit(normalisasiData)
 
             # Menampilkan centroid awal
-            st.write("Centroid Awal:")
             initial_centroids = kmeans.cluster_centers_
-            st.table(pd.DataFrame(initial_centroids, columns=data.columns[1:6]))
+            exp_cent = st.expander("See Initial Centroid")
+            exp_cent.write("Centroid Awal:")
+            exp_cent.table(pd.DataFrame(initial_centroids, columns=data.columns[1:6]))
 
             cluster_labels = kmeans.predict(normalisasiData)
             data['Cluster'] = cluster_labels
@@ -258,7 +315,7 @@ def main():
             df_cluster_categories['Prioritas'] = df_cluster_categories.apply(calculate_priority, axis=1)
 
             st.write("Cluster Prioritas:")
-            st.write(df_cluster_categories)
+            st.table(df_cluster_categories)
 
     with tab3:
         col1, col2, col3 = st.columns(3, gap = "medium")
