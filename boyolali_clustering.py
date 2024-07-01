@@ -63,7 +63,6 @@ def main():
             <div class="justified">
                 <p class="bold">2. Normalisasi Data</p>
                     <p>Normalisasi dilakukan untuk memastikan bahwa semua variabel memiliki bobot yang sama dan tidak ada satu variabel pun yang mendominasi analisis karena skala yang berbeda. Dalam penelitian ini, semua data indikator kesehatan akan dinormalisasikan dalam rentang 0-1.</p>
-                    
             </div>
         """, unsafe_allow_html=True)
         st.image("img/hasil_analisis/norm_data.png")
@@ -140,14 +139,9 @@ def main():
         st.markdown("""
             <div class="justified">
                 <p>Pada kasus ini, setiap kategori memiliki bobot nilainya masing-masing. Kategori rendah ditetapkan dengan bobot nilai 1, kategori sedang dengan bobot nilai 2, lalu kategori tinggi dengan bobot nilai 3. Nilai prioritas tiap klaster didapat dari total nilai indeks pada tiap klaster dibagi dengan jumlah kategori. Dari data tabel diatas, dapat disimpulkan bahwa klaster 3 dan klaster 0 memiliki kondisi kesehatan balita yang paling rendah dan harus diprioritaskan untuk penanganan kesehatan. Dengan demikian, upaya penanggulangan kesehatan balita dapat lebih terfokus dan efektif dalam rangka meningkatkan kondisi kesehatan anak-anak di Kabupaten Boyolali secara signifikan.</p>
-                    
-                
             </div>
         """, unsafe_allow_html=True)
 
-
-
-        
     with tab2:
 
         st.header("Clustering Analysis")
@@ -281,6 +275,7 @@ def main():
             st.write("Visualisasi dengan PCA:")
             st.pyplot(plt)
 
+            # Silhouette Method
             # Menentukan rentang nilai k
             n_samples = normalisasiData.shape[0]
             k_range = range(2, min(11, n_samples))
@@ -387,7 +382,6 @@ def main():
     with tab3:
         col1, col2, col3 = st.columns(3, gap = "medium")
         
-        
         col1.image("img/Poltak.jpg")
         col1.write("Poltak Alfredo Sitorus Philander")
         col1.write("L0122125")
@@ -397,7 +391,6 @@ def main():
         col3.image("img/Pian.jpg")
         col3.write("Raihan Havian")
         col3.write("L0122132")
-
 
 if __name__ == "__main__":
     main()
