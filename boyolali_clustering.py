@@ -97,7 +97,7 @@ def main():
         st.markdown("""
             <div class="justified">
                 <p class="bold">4. Klasterisasi Data</p>
-                    <p>Sebelum melakukan Clustering, kita terlebih dahulu menguji performa algoritma K-means pada data yang sudah dinormalisasi untuk menentukan nilai k yang optimal. Pengujian bisa dilakukan dengan beberapa cara, salah satunya adalah dengan menggunakan parameter Davis Bouldin ataupun Silhouette Method. Pada parameter Davies Bouldin, Indeks Davies Bouldin (IDB) terendah menunjukkan jumlah klaster yang paling optimal.</p>
+                    <p>Sebelum melakukan Clustering, kita terlebih dahulu menguji performa algoritma K-means pada data yang sudah dinormalisasi untuk menentukan nilai 𝑘 yang optimal. Pengujian bisa dilakukan dengan beberapa cara, salah satunya adalah dengan menggunakan parameter Davis Bouldin ataupun Silhouette Method. Pada parameter Davies Bouldin, Indeks Davies Bouldin (IDB) terendah menunjukkan jumlah klaster yang paling optimal.</p>
                     <p>Berdasarkan hasil pengujian performa tersebut, diperoleh hasil sebagai berikut : </p>
             </div>
         """, unsafe_allow_html=True)
@@ -112,7 +112,7 @@ def main():
         st.image("img/hasil_analisis/silhouette.png", caption="Silhouette Method")
         st.markdown("""
             <div class="justified">
-                <p>Berdasarkan grafik diatas, titik tertinggi grafik berada pada k = 5. Jadi, berdasarkan Metode Silhouette dan nilai Davis-Bouldin, nilai k yang optimal yaitu k = 5. Setelah menentukan jumlah klaster, maka selanjutnya diperoleh hasil klaster seperti pada gambar dibawah.</p>
+                <p>Berdasarkan grafik diatas, titik tertinggi grafik berada pada 𝑘 = 5. Jadi, berdasarkan Metode Silhouette dan nilai Davis-Bouldin, nilai 𝑘 yang optimal yaitu 𝑘 = 5. Setelah menentukan jumlah klaster, maka selanjutnya diperoleh hasil klaster seperti pada gambar dibawah.</p>
             </div>
         """, unsafe_allow_html=True)
 
@@ -202,8 +202,15 @@ def main():
                     high = statistics.loc[column, 'high']
                     data[column + ' KATEGORI'] = data[column].apply(categorize, args=(low, high))
 
+            # st.write("Data dengan kategori:")
+            # st.table(data)
+
+            # Menampilkan data dengan hanya kolom KECAMATAN dan kolom kategori
+            columns_to_show = ['KECAMATAN'] + [col for col in data.columns if 'KATEGORI' in col]
+            data_filtered = data[columns_to_show]
+
             st.write("Data dengan kategori:")
-            st.table(data)
+            st.table(data_filtered)
 
             # Normalisasi Data
             dataCluster = data.iloc[:, 1:6].fillna(0)
@@ -291,7 +298,7 @@ def main():
             # Plotting
             st.write("")
             st.header("Proses Clustering")
-            st.write("Mencari nilai k optimal")
+            st.write("Mencari nilai 𝑘 optimal")
             plt.figure(figsize=(10, 6))
             plt.plot(k_range, silhouette_scores, marker='o')
             plt.xlabel('Jumlah Klaster (k)')
@@ -304,7 +311,7 @@ def main():
 
             # Menentukan nilai k
             optimal_k = silhouette_scores.index(max(silhouette_scores)) + 2
-            st.write(f"Didapatkan nilai k optimal: {optimal_k}")
+            st.write(f"Didapatkan nilai 𝑘 optimal: {optimal_k}")
             st.write("")
 
             # Kmeans Clustering
@@ -324,7 +331,12 @@ def main():
             for cluster in range(optimal_k):
                 st.write(f"Anggota dari Cluster {cluster}:")
                 cluster_members = data[data['Cluster'] == cluster]
-                st.write(cluster_members)
+                # st.write(cluster_members)
+
+                # Menampilkan anggota dari cluster tertentu
+                cts = ['KECAMATAN'] + [col for col in cluster_members if 'KATEGORI' in col] + ['Cluster']
+                d_filter = cluster_members[cts]
+                st.table(d_filter)
 
             # PCA setelah klaster
             pca = PCA(n_components=5)
@@ -380,6 +392,7 @@ def main():
             st.table(df_cluster_categories)
 
     with tab3:
+        st.header("Kelompok 3")
         col1, col2, col3 = st.columns(3, gap = "medium")
         
         col1.image("img/Poltak.jpg")
